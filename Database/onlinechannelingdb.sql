@@ -100,6 +100,7 @@ CREATE TABLE `patient` (
   `firstName` varchar(20) NOT NULL,
   `lastName` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `gender` varchar(50) NOT NULL,
   `address` varchar(100) NOT NULL,
   `password` varchar(50) NOT NULL,
   `city` varchar(50) NOT NULL,

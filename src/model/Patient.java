@@ -17,6 +17,8 @@ public class Patient {
 	
 	private String email;
 	
+	private String gender;
+	
 	private String address;
 	
 	private String password;
@@ -65,6 +67,14 @@ public class Patient {
 		this.email = email;
 	}
 
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -100,9 +110,11 @@ public class Patient {
 	@Override
 	public String toString() {
 		return "Patient [patientID=" + patientID + ", NIC=" + NIC + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", email=" + email + ", address=" + address + ", password=" + password + ", city=" + city
-				+ ", contact=" + contact + "]";
+				+ lastName + ", email=" + email + ", gender=" + gender + ", address=" + address + ", password="
+				+ password + ", city=" + city + ", contact=" + contact + "]";
 	}
+
+	
 
 	
 	
