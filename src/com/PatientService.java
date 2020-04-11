@@ -9,6 +9,6 @@ public class PatientService {
 	@GET 
 	@Produces("text/plain")
     public String getIt() {
-        return "Hi Malit !";
+        return "Hi patientservice !";
     }
 }
