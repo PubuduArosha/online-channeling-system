@@ -9,6 +9,6 @@ public class appoinmentService {
 	@GET 
     @Produces("text/plain")
     public String getIt() {
-        return "Hi jude!";
+        return "Hi appoinmentService!";
     }
 }
