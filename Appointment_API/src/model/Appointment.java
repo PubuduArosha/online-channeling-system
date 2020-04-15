@@ -9,8 +9,6 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Date;
 
-import org.apache.tomcat.jni.Time;
-
 public class Appointment {
 
 	// A common method to connect to the DB

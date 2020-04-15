@@ -19,7 +19,7 @@ import com.google.gson.JsonParser;
 
 import model.Doctor;
 
-@Path("/paf")
+@Path("/doctor")
 public class DoctorService {
 	
 	Doctor doctor =  new Doctor();
