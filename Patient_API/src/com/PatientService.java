@@ -16,7 +16,7 @@ import com.google.gson.JsonParser;
 
 import DBrepository.LoginRepository;
 import DBrepository.PatientRepository;
-import model.Patient;
+
 
 @Path("patient")
 public class PatientService {
@@ -24,24 +24,25 @@ public class PatientService {
 	
 	
 	@GET
-	@Produces({MediaType.APPLICATION_JSON})
-	public Patient getPatient()
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getPatient()
 	{
-		Patient patient=new Patient();
-		
-		
-		patient.setNIC("981254793v");
-		patient.setFirstName("Malidi");
-		patient.setLastName("Wageesha");
-		patient.setEmail("malidi@gmail.com");
-		patient.setGender("female");
-		patient.setAddress("rathnapura");
-		patient.setPassword("1234");
-		patient.setCity("kuruwita");
-		patient.setContact("0771526879");
-		
-		
-		return patient;
+//		Patient patient=new Patient();
+//		
+//		
+//		patient.setNIC("981254793v");
+//		patient.setFirstName("Malidi");
+//		patient.setLastName("Wageesha");
+//		patient.setEmail("malidi@gmail.com");
+//		patient.setGender("female");
+//		patient.setAddress("rathnapura");
+//		patient.setPassword("1234");
+//		patient.setCity("kuruwita");
+//		patient.setContact("0771526879");
+//		
+//		
+//		return patient;
+		return "Welcome to patient API";
 	}
 
 

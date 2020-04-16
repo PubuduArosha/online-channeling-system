@@ -5,7 +5,7 @@ import java.util.List;
 
 import java.sql.*;
 
-import model.Patient;
+
 
 /**
  * @author Malidi
@@ -40,7 +40,7 @@ public class PatientRepository{
 	{ String output="";
 	output = "<table border=\"1\"><tr><th>Patient ID</th><th>NIC</th><th>First Name</th><th>Last Name</th>"
 			+ "<th>Email</th><th>Gender</th><th>Address</th><th>Password</th><th>City</th><th>Contact</th></tr>";
-		List<Patient> patient=new ArrayList<>(); 
+		
 		String sql="select * from patient";
 		
 		try {
@@ -159,107 +159,66 @@ public class PatientRepository{
 	
 	
 	
-	public Patient getPatientByLogins(String username,String password)
-	{
-		System.out.println("Started to execute");
 
-		String sql=new String("SELECT * FROM patient WHERE userName=? And password=?");
-		
-		
-		System.out.println(sql);
-		Patient p=new Patient();
-		try {
-			PreparedStatement stm = con.prepareStatement(sql);
-			stm.setString(1, username);
-			stm.setString(2, password);
-			
-			ResultSet rs=stm.executeQuery();
-			System.out.println(rs);
-			if(rs.next())
-			{
-				
-				p.setPatientID(rs.getInt(1));
-				p.setNIC(rs.getString(2));
-				p.setFirstName(rs.getString(3));
-				p.setLastName(rs.getString(4));
-				p.setEmail(rs.getString(5));
-				p.setGender(rs.getString(6));
-				p.setAddress(rs.getString(7));
-				p.setPassword(rs.getString(8));
-				p.setCity(rs.getString(9));
-				p.setContact(rs.getString(10));
-				
-			}
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		return p;
-	}
-	
 	
 	/**
 	 * @param p1
 	 */
-	public String createPatient(Patient p1)
-	{
-		int count=0;
-		String sql="insert into patient (NIC, firstName, lastName, email , gender , address, password, city, contact) values (?,?,?,?,?,?,?,?,?)";
-		
-		String sql2=new String("select * from patient where email=?");
-		
-		try {
-			PreparedStatement stm = con.prepareStatement(sql2);
-			stm.setString(1,p1.getEmail());
-			
-			ResultSet rs=stm.executeQuery();
-			if(rs.next())
-			{
-				return "Sorry there is already a registered user with this email!!";
-				
-			}else {
-
-			
-			
-			
-			PreparedStatement st =con.prepareStatement(sql);
-			System.out.println(st);
-		
-				
-			
-			st.setString(1,p1.getNIC());
-			st.setString(2,p1.getFirstName());
-			st.setString(3,p1.getLastName());
-			st.setString(4,p1.getEmail());
-			st.setString(5,p1.getGender());
-			st.setString(6,p1.getAddress());
-			st.setString(7,p1.getPassword());
-			st.setString(8,p1.getCity());
-			st.setString(9,p1.getContact());
-			
-			count=st.executeUpdate();
-			
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("connection value"+e);
-		}
-		
-		
-		if(count>0)
-		{
-			return "congratulations register success!!";
-		}else {
-			
-			return "register failure";
-		}
-		
-	}
+//	public String createPatient(Patient p1)
+//	{
+//		int count=0;
+//		String sql="insert into patient (NIC, firstName, lastName, email , gender , address, password, city, contact) values (?,?,?,?,?,?,?,?,?)";
+//		
+//		String sql2=new String("select * from patient where email=?");
+//		
+//		try {
+//			PreparedStatement stm = con.prepareStatement(sql2);
+//			stm.setString(1,p1.getEmail());
+//			
+//			ResultSet rs=stm.executeQuery();
+//			if(rs.next())
+//			{
+//				return "Sorry there is already a registered user with this email!!";
+//				
+//			}else {
+//
+//			
+//			
+//			
+//			PreparedStatement st =con.prepareStatement(sql);
+//			System.out.println(st);
+//		
+//				
+//			
+//			st.setString(1,p1.getNIC());
+//			st.setString(2,p1.getFirstName());
+//			st.setString(3,p1.getLastName());
+//			st.setString(4,p1.getEmail());
+//			st.setString(5,p1.getGender());
+//			st.setString(6,p1.getAddress());
+//			st.setString(7,p1.getPassword());
+//			st.setString(8,p1.getCity());
+//			st.setString(9,p1.getContact());
+//			
+//			count=st.executeUpdate();
+//			
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			System.out.println("connection value"+e);
+//		}
+//		
+//		
+//		if(count>0)
+//		{
+//			return "congratulations register success!!";
+//		}else {
+//			
+//			return "register failure";
+//		}
+//		
+//	}
 
 	
 	
