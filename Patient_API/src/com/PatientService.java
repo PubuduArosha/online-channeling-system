@@ -49,7 +49,7 @@ public class PatientService {
 	PatientRepository repo=new PatientRepository();
 
 	
-	
+	//patient registration
 	@POST
 	@Path("register")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -73,7 +73,7 @@ public class PatientService {
 		
 	}
 	
-	
+	//update
 	@PUT
 	@Path("update")
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -100,7 +100,7 @@ public class PatientService {
 	}
 	
 
-	
+	//Patient service API path for update.
 	@GET
 	@Path("/id")
 	@Produces({ MediaType.TEXT_HTML })
@@ -113,7 +113,7 @@ public class PatientService {
 		return repo.getPatient(patientID);
 	
 	}
-	
+	//Get all patient details.
 	@GET
 	@Path("/all")
 	@Produces({ MediaType.TEXT_HTML })
