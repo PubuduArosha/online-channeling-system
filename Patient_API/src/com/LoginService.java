@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import DBrepository.LoginRepository;
+import model.LoginRepository;
 
 @Path("login")
 public class LoginService {
