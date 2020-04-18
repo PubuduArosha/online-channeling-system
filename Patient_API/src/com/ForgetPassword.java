@@ -10,8 +10,12 @@ import javax.ws.rs.core.MediaType;
 
 import model.LoginRepository;
 
+/**
+ * @author Malidi
+ *
+ */
 @Path("forgetpassword")
-
+//for user reset password (doctor/admin/patient)
 public class ForgetPassword {
 	LoginRepository logrepo=new LoginRepository();
 	

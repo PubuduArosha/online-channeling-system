@@ -6,6 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author Malidi
+ *
+ */
 public class LoginRepository {
 	
 	Connection con=null;

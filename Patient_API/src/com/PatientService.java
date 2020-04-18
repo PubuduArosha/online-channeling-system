@@ -22,6 +22,10 @@ import model.LoginRepository;
 import model.PatientRepository;
 
 
+/**
+ * @author Malidi
+ *
+ */
 @Path("patient")
 public class PatientService {
 	
@@ -31,21 +35,7 @@ public class PatientService {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getPatient()
 	{
-//		Patient patient=new Patient();
-//		
-//		
-//		patient.setNIC("981254793v");
-//		patient.setFirstName("Malidi");
-//		patient.setLastName("Wageesha");
-//		patient.setEmail("malidi@gmail.com");
-//		patient.setGender("female");
-//		patient.setAddress("rathnapura");
-//		patient.setPassword("1234");
-//		patient.setCity("kuruwita");
-//		patient.setContact("0771526879");
-//		
-//		
-//		return patient;
+
 		return "Welcome to patient API";
 	}
 
@@ -53,7 +43,7 @@ public class PatientService {
 	PatientRepository repo=new PatientRepository();
 
 	
-	//patient registration
+	//patient registration Service access
 	@POST
 	@Path("register")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -77,7 +67,11 @@ public class PatientService {
 		
 	}
 	
-	//update
+	//update patient details
+	/**
+	 * @param AppData
+	 * @return
+	 */
 	@PUT
 	@Path("update")
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

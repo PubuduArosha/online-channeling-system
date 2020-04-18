@@ -157,68 +157,6 @@ public class PatientRepository{
 	}
 	
 	
-	
-	
-
-	
-	/**
-	 * @param p1
-	 */
-//	public String createPatient(Patient p1)
-//	{
-//		int count=0;
-//		String sql="insert into patient (NIC, firstName, lastName, email , gender , address, password, city, contact) values (?,?,?,?,?,?,?,?,?)";
-//		
-//		String sql2=new String("select * from patient where email=?");
-//		
-//		try {
-//			PreparedStatement stm = con.prepareStatement(sql2);
-//			stm.setString(1,p1.getEmail());
-//			
-//			ResultSet rs=stm.executeQuery();
-//			if(rs.next())
-//			{
-//				return "Sorry there is already a registered user with this email!!";
-//				
-//			}else {
-//
-//			
-//			
-//			
-//			PreparedStatement st =con.prepareStatement(sql);
-//			System.out.println(st);
-//		
-//				
-//			
-//			st.setString(1,p1.getNIC());
-//			st.setString(2,p1.getFirstName());
-//			st.setString(3,p1.getLastName());
-//			st.setString(4,p1.getEmail());
-//			st.setString(5,p1.getGender());
-//			st.setString(6,p1.getAddress());
-//			st.setString(7,p1.getPassword());
-//			st.setString(8,p1.getCity());
-//			st.setString(9,p1.getContact());
-//			
-//			count=st.executeUpdate();
-//			
-//			}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			System.out.println("connection value"+e);
-//		}
-//		
-//		
-//		if(count>0)
-//		{
-//			return "congratulations register success!!";
-//		}else {
-//			
-//			return "register failure";
-//		}
-//		
-//	}
 
 	
 	
@@ -318,30 +256,7 @@ public class PatientRepository{
 	
 	
 	
-//	public String DeletePatient(int id) {
-//		
-//		int count=0;
-//		String sql = "delete from patient where patientID=?";
-//		try {
-//			PreparedStatement stmt = con.prepareStatement(sql);
-//			
-//				stmt.setInt(1,id);				
-//				count=stmt.executeUpdate();
-//				
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		if(count>0)
-//		{
-//			return "Patient with id "+id+" deleted";
-//		}else {
-//			
-//			return "delete unsuccesful";
-//		}
-//		
-//
-//	}
+
 	
 	
 	

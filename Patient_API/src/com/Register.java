@@ -16,7 +16,7 @@ import model.PatientRepository;
 
 @Path("register")
 //For patient Registration
-public class RegisterService {
+public class Register {
 
 	PatientRepository repo=new PatientRepository();
 	@POST

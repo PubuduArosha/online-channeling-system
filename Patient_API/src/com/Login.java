@@ -14,7 +14,8 @@ import com.google.gson.JsonParser;
 import model.LoginRepository;
 
 @Path("login")
-public class LoginService {
+// for user login (doctor/admin/patient)
+public class Login {
 	LoginRepository logrepo=new LoginRepository();
 	@POST
 	@Produces({ MediaType.TEXT_PLAIN })
@@ -23,13 +24,7 @@ public class LoginService {
 	{
 		if(logEmail!=null || logPassword!=null)
 		{
-//			JsonObject itemObject1 = new JsonParser().parse(logEmail).getAsJsonObject();
-//			String email = itemObject1.get("email").getAsString();
-//			System.out.println(email);
-//			JsonObject itemObject2 = new JsonParser().parse(logPassword).getAsJsonObject();
-//			String password = itemObject2.get("password").getAsString();
-//			System.out.println(password);
-//			
+	
 			return logrepo.login(logEmail, logPassword);
 		}else {
 			
