@@ -18,6 +18,7 @@ public class Doctor {
 	private String password;
 	private int adminID;
 	private String doctorStatus;
+	private boolean valid;
 	
 	public int getDoctorID() {
 		return doctorID;
@@ -122,6 +123,16 @@ public class Doctor {
 	public void setDoctorStatus(String doctorStatus) {
 		this.doctorStatus = doctorStatus;
 	}
+	
+	
+
+	public boolean isValid() {
+		return valid;
+	}
+
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
 
 	//A common connection to connect to the DB
 	private Connection connect()
@@ -158,7 +169,7 @@ public class Doctor {
 			}
 				
 				// Prepare the html table to be displayed
-				output =  "<table border=\"1\"><tr><th>NIC</th><th>gender</th><th>firstName</th><th>lastname</th><th>email</th><th>specification</th><th>contact</th><th>workDate</th><th>workTime</th><th>password</th><th>adminID</th><th>doctorStatus</th></tr>";
+				output =  "<table border=\"1\"><tr><th>NIC</th><th>gender</th><th>firstName</th><th>lastname</th><th>email</th><th>specification</th><th>contact</th><th>workDate</th><th>workTime</th><th>password</th><th>adminID</th><th>doctorStatus</th><th>Valid</th></tr>";
 				
 				String query = "select * from doctor";
 				Statement stmt = con.createStatement(); 
@@ -180,6 +191,7 @@ public class Doctor {
 					String password = rs.getString("password");
 					String adminID = Integer.toString(rs.getInt("adminID"));
 					String doctorStatus = rs.getString("doctorStatus");
+					String valid = Boolean.toString(rs.getBoolean("valid"));
 					
 					// Add into the html table     
 					output += "<tr><td>" + NIC + "</td>"; 
@@ -193,7 +205,8 @@ public class Doctor {
 					output += "<td>" + workTime + "</td>";
 					output += "<td>" + password + "</td>";
 					output += "<td>" + adminID + "</td>";
-					output += "<td>" + doctorStatus + "</td></tr>";	
+					output += "<td>" + doctorStatus + "</td>";	
+					output += "<td>" + valid + "</td></tr>";	
 				}
 				con.close();
 				
@@ -209,7 +222,7 @@ public class Doctor {
 			return output;
 		}
 	
-	public String insertDoctor(String NIC,String gender, String firstName, String lastName,String email,String specification, String contact, String workDate,String workTime,String password, String adminID,String doctorStatus)
+	public String insertDoctor(String NIC,String gender, String firstName, String lastName,String email,String specification, String contact, String workDate,String workTime,String password, String adminID,String doctorStatus, String valid)
 	{
 		String output = "";
 		
@@ -223,7 +236,7 @@ public class Doctor {
 			}
 			
 			// create a prepared statement
-			String query = "insert into doctor (`doctorID`, `NIC`, `gender`,  `firstName`, `lastname`, `email`,`specification`,  `contact`, `workDate`,`workTime`,`password`, `adminID`, `doctorStatus`)" + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query = "insert into doctor (`doctorID`, `NIC`, `gender`,  `firstName`, `lastname`, `email`,`specification`,  `contact`, `workDate`,`workTime`,`password`, `adminID`, `doctorStatus`, `valid`)" + "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query); 
 			
@@ -241,6 +254,7 @@ public class Doctor {
 			preparedStmt.setString(11, password);
 			preparedStmt.setInt(12, Integer.parseInt(adminID));
 			preparedStmt.setString(13, doctorStatus );
+			preparedStmt.setBoolean(14, Boolean.parseBoolean(valid));
 			
 			//excute the statement
 			preparedStmt.execute();
@@ -257,7 +271,7 @@ public class Doctor {
 		return output;
 	}
 	
-	public String updateDoctor(String doctorID,String NIC,String gender, String firstName, String lastName,String email,String specification, String contact, String workDate,String workTime,String password, String adminID,String doctorStatus)
+	public String updateDoctor(String doctorID,String NIC,String gender, String firstName, String lastName,String email,String specification, String contact, String workDate,String workTime,String password, String adminID,String doctorStatus, String valid)
 	{
 		String output = "";
 		
@@ -271,7 +285,7 @@ public class Doctor {
 			}
 			
 			//create a prepared statement
-			String query = "UPDATE doctor SET NIC=?, gender=?,firstName=?, lastName=?, email=?,specification=?,  contact=?, workDate=?,workTime=?,password=?, adminID=?, doctorStatus=? WHERE doctorID=?";
+			String query = "UPDATE doctor SET NIC=?, gender=?,firstName=?, lastName=?, email=?,specification=?,  contact=?, workDate=?,workTime=?,password=?, adminID=?, doctorStatus=?, valid=? WHERE doctorID=?";
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query); 
 			
@@ -289,6 +303,7 @@ public class Doctor {
 			preparedStmt.setInt(11, Integer.parseInt(adminID));
 			preparedStmt.setString(12, doctorStatus);
 			preparedStmt.setInt(13, Integer.parseInt(doctorID));
+			preparedStmt.setBoolean(14, Boolean.getBoolean(valid));
 			
 			//execute the statement
 			preparedStmt.execute();

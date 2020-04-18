@@ -33,9 +33,9 @@ public class DoctorService {
     public String insertDoctor(@FormParam("NIC") String NIC, @FormParam("gender") String gender, @FormParam("firstName") String firstName,
     		@FormParam("lastName") String lastName, @FormParam("email") String email, @FormParam("specification") String specification,
     		@FormParam("contact") String contact, @FormParam("workDate") String workDate, @FormParam("workTime") String workTime,
-    		@FormParam("password") String password, @FormParam("adminID") String adminID, @FormParam("doctorStatus") String doctorStatus)
+    		@FormParam("password") String password, @FormParam("adminID") String adminID, @FormParam("doctorStatus") String doctorStatus, @FormParam("valid") String valid)
     {
-    	String output = doctor.insertDoctor(NIC, gender, firstName, lastName, email, specification, contact, workDate, workTime, password, adminID, doctorStatus);
+    	String output = doctor.insertDoctor(NIC, gender, firstName, lastName, email, specification, contact, workDate, workTime, password, adminID, doctorStatus, valid);
     	return output;
     }
     
@@ -72,8 +72,9 @@ public class DoctorService {
     	String password = jdoctor.get("password").getAsString();
     	String adminID = jdoctor.get("adminID").getAsString();
     	String doctorStatus = jdoctor.get("doctorStatus").getAsString();
+    	String valid = jdoctor.get("valid").getAsString();
     	
-    	String output = doctor.updateDoctor(doctorID, NIC, gender, firstName, lastName, email, specification, contact, workDate, workTime, password, adminID, doctorStatus);
+    	String output = doctor.updateDoctor(doctorID, NIC, gender, firstName, lastName, email, specification, contact, workDate, workTime, password, adminID, doctorStatus, valid);
     	
     	return output;
     }
