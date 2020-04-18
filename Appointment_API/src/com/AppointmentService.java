@@ -42,8 +42,8 @@ public class AppointmentService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String GetStudent (String id) {
 		
-		JsonObject itemObject = new JsonParser().parse(id).getAsJsonObject();
-		String appointmentID = itemObject.get("appointmentID").getAsString();
+		JsonObject AppObject = new JsonParser().parse(id).getAsJsonObject();
+		String appointmentID = AppObject.get("appointmentID").getAsString();
 		return appObj.GetAppointment(appointmentID);
 	}
 	
@@ -63,17 +63,17 @@ public class AppointmentService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String updateAppointment(String AppData) {
-		JsonObject itemObject = new JsonParser().parse(AppData).getAsJsonObject();
+		JsonObject AppObject = new JsonParser().parse(AppData).getAsJsonObject();
 
-		String appointmentID = itemObject.get("appointmentID").getAsString();
-		String date = itemObject.get("date").getAsString();
-		String time = itemObject.get("time").getAsString();
-		String hospitalID = itemObject.get("hospitalID").getAsString();
-		String patientID = itemObject.get("patientID").getAsString();
-		String doctorID = itemObject.get("doctorID").getAsString();
-		String paymentID = itemObject.get("paymentID").getAsString();
-		String appointmentStatus = itemObject.get("appointmentStatus").getAsString();
-		String refundID = itemObject.get("refundID").getAsString();
+		String appointmentID = AppObject.get("appointmentID").getAsString();
+		String date = AppObject.get("date").getAsString();
+		String time = AppObject.get("time").getAsString();
+		String hospitalID = AppObject.get("hospitalID").getAsString();
+		String patientID = AppObject.get("patientID").getAsString();
+		String doctorID = AppObject.get("doctorID").getAsString();
+		String paymentID = AppObject.get("paymentID").getAsString();
+		String appointmentStatus = AppObject.get("appointmentStatus").getAsString();
+		String refundID = AppObject.get("refundID").getAsString();
 		
 		String output = appObj.updateAppoinment(appointmentID, date, time, hospitalID, patientID,doctorID,paymentID,appointmentStatus,refundID);
 		return output; 
