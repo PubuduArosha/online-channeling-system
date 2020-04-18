@@ -57,28 +57,6 @@ public class Appointment {
 		return output;
 	}
 
-	// Get Appointment details
-	private String GetAppoinment() {
-		String output = "";
-		try {
-			Connection con = connect();
-			if (con == null) {
-				return "Error while connecting to the database for inserting.";
-			}
-			String query = " insert into items  ('itemID','itemCode','itemName','itemPrice','itemDesc')"
-					+ " values (?, ?, ?, ?, ?)";
-			PreparedStatement preparedStmt = con.prepareStatement(query);
-
-			preparedStmt.execute();
-			con.close();
-			output = "Inserted successfully";
-		} catch (Exception e) {
-			output = "Error while inserting the Appointment.";
-			System.err.println(e.getMessage());
-		}
-		return output;
-	}
-
 	// Get All Appointment details
 	public String GetAllAppoinments() {
 		String output = "";
@@ -130,7 +108,7 @@ public class Appointment {
 		return output;
 	}
 	// Get Appointment details
-		public String GetAppoinments(String appointmentID) {
+		public String GetAppointment(String appointmentID) {
 			String output = "";
 
 			try {
@@ -141,16 +119,11 @@ public class Appointment {
 
 				output = "<table border=\"1\"><tr><th>Appointment ID</th><th>Date</th><th>Time</th><th>hospitalID</th>"
 						+ "<th>patientID</th><th>doctorID</th><th>paymentID </th><th>Status</th></tr>";
-				String query = "SELECT * from appointment where `appointmentID`=?";
+				String query = "SELECT * from `appointment` where appointmentID="+appointmentID;
 				
-				PreparedStatement preparedStmt = con.prepareStatement(query);
-				preparedStmt.setInt(1, Integer.parseInt(appointmentID)); 
-				ResultSet rs = preparedStmt.executeQuery(query);
-				
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(query);
 
-				// PreparedStatement preparedStmt = con.prepareStatement(query);
-
-				// preparedStmt.execute();
 
 				if (rs.next()) {
 					String AppID = Integer.toString(rs.getInt("appointmentID"));
@@ -176,8 +149,7 @@ public class Appointment {
 				output += "</table>";
 				return output;
 			} catch (Exception e) {
-				output = "Error while GetAll Appointments.";
-				// return output;
+				output = "Error while  Appointment.";
 				System.err.println(e.getMessage());
 			}
 			return output;

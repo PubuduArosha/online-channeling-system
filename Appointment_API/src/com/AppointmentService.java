@@ -37,14 +37,14 @@ public class AppointmentService {
 	}
 
 	@GET
-	@Path("/j")
+	@Path("/app")
 	@Produces({ MediaType.TEXT_HTML })
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String GetStudent (String id) {
 		
 		JsonObject itemObject = new JsonParser().parse(id).getAsJsonObject();
 		String appointmentID = itemObject.get("appointmentID").getAsString();
-		return appObj.GetAppoinments(appointmentID);
+		return appObj.GetAppointment(appointmentID);
 	}
 	
 	@POST
