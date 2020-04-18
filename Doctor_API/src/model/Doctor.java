@@ -12,7 +12,7 @@ public class Doctor {
 	private String lastName;
 	private String email;
 	private String specification;
-	private int contact;
+	private String contact;
 	private String workDate;
 	private String workTime;
 	private String password;
@@ -75,11 +75,11 @@ public class Doctor {
 		this.specification = specification;
 	}
 
-	public int getContact() {
+	public String getContact() {
 		return contact;
 	}
 
-	public void setContact(int contact) {
+	public void setContact(String contact) {
 		this.contact = contact;
 	}
 
@@ -174,7 +174,7 @@ public class Doctor {
 					String lastName = rs.getString("lastName");
 					String email = rs.getString("email");
 					String specification = rs.getString("specification");
-					String contact = Integer.toString(rs.getInt("contact"));
+					String contact = rs.getString("contact");
 					String workDate = rs.getString("workDate");
 					String workTime = rs.getString("workTime");
 					String password = rs.getString("password");
@@ -235,7 +235,7 @@ public class Doctor {
 			preparedStmt.setString(5, lastName);
 			preparedStmt.setString(6, email);
 			preparedStmt.setString(7, specification);
-			preparedStmt.setInt(8, Integer.parseInt(contact));
+			preparedStmt.setString(8, contact);
 			preparedStmt.setString(9, workDate);
 			preparedStmt.setString(10, workTime);
 			preparedStmt.setString(11, password);
@@ -282,7 +282,7 @@ public class Doctor {
 			preparedStmt.setString(4, lastName);
 			preparedStmt.setString(5, email);
 			preparedStmt.setString(6, specification);
-			preparedStmt.setInt(7, Integer.parseInt(contact));
+			preparedStmt.setString(7, contact);
 			preparedStmt.setString(8, workDate);
 			preparedStmt.setString(9, workTime);
 			preparedStmt.setString(10, password);
