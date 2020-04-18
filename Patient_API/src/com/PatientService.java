@@ -1,5 +1,6 @@
 package com;
 
+import org.jsoup.nodes.Document;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -10,6 +11,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import org.jsoup.Jsoup;
+import org.jsoup.parser.Parser;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -119,6 +123,20 @@ public class PatientService {
 	@Produces({ MediaType.TEXT_HTML })
 	public String GetallPatients() {
 		return repo.getAllPatients();
+	}
+	
+	//To delete a patient
+	@DELETE
+	@Path("delete")
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String DelAppoinment(String patientid) {
+		
+		Document doc= Jsoup.parse(patientid,"", Parser.xmlParser());
+		
+		String PatId = doc.select("patientID").text();	
+		String output = repo.DeletePatient(PatId); 
+		return output;
 	}
 	
 	

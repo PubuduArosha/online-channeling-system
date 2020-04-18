@@ -318,29 +318,49 @@ public class PatientRepository{
 	
 	
 	
-	public String DeletePatient(int id) {
-		
-		int count=0;
-		String sql = "delete from patient where patientID=?";
+//	public String DeletePatient(int id) {
+//		
+//		int count=0;
+//		String sql = "delete from patient where patientID=?";
+//		try {
+//			PreparedStatement stmt = con.prepareStatement(sql);
+//			
+//				stmt.setInt(1,id);				
+//				count=stmt.executeUpdate();
+//				
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		if(count>0)
+//		{
+//			return "Patient with id "+id+" deleted";
+//		}else {
+//			
+//			return "delete unsuccesful";
+//		}
+//		
+//
+//	}
+	
+	
+	
+	public String DeletePatient(String patientID) {
+		String output = "";
 		try {
-			PreparedStatement stmt = con.prepareStatement(sql);
 			
-				stmt.setInt(1,id);				
-				count=stmt.executeUpdate();
-				
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		
-		if(count>0)
-		{
-			return "Patient with id "+id+" deleted";
-		}else {
-			
-			return "delete unsuccesful";
+			String query = "delete from patient where patientID=?";
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			preparedStmt.setInt(1, Integer.parseInt(patientID)); 
+			preparedStmt.execute();
+			con.close();
+			output = "Deleted successfully";
+		} catch (Exception e) {
+			output = "Error while deleting the patient.";
+			System.err.println(e.getMessage());
 		}
-		
-
+		return output;
 	}
 	
 	
