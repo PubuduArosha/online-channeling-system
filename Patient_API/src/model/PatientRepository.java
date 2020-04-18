@@ -70,20 +70,7 @@ public class PatientRepository{
 				output += "<td>" + password + "</td>";
 				output += "<td>" + city + "</td>";
 				output += "<td>" + contact + "</td>";
-//				Patient p=new Patient();
-//				
-//				p.setPatientID(rs.getInt(1));
-//				p.setNIC(rs.getString(2));
-//				p.setFirstName(rs.getString(3));
-//				p.setLastName(rs.getString(4));
-//				p.setEmail(rs.getString(5));
-//				p.setGender(rs.getString(6));
-//				p.setAddress(rs.getString(7));
-//				p.setPassword(rs.getString(8));
-//				p.setCity(rs.getString(9));
-//				p.setContact(rs.getString(10));
-//				
-//				patient.add(p);
+
 			}
 			con.close();
 			output += "</table>";
@@ -115,8 +102,7 @@ public class PatientRepository{
 		try {
 			PreparedStatement preparedStmt = con.prepareStatement(sql);
 			System.out.println(preparedStmt);
-			//int val=Integer.parseInt(patID);
-			//preparedStmt.setInt(1,val); 
+
 			System.out.println(val);
 			ResultSet rs = preparedStmt.executeQuery(sql);
 			if(rs.next())

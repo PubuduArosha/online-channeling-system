@@ -22,7 +22,7 @@ public class ForgetPassword {
 	@PUT
 	@Produces({ MediaType.TEXT_PLAIN })
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public String changePassword(@FormParam("username") String logEmail,@FormParam("password") String logPassword)
+	public String changePassword(@FormParam("email") String logEmail,@FormParam("password") String logPassword)
 	{
 	
 		if(logEmail!=null || logPassword!=null)
