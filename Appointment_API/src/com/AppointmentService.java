@@ -40,7 +40,7 @@ public class AppointmentService {
 	@Path("/app")
 	@Produces({ MediaType.TEXT_HTML })
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String GetStudent (String id) {
+	public String GetApp (String id) {
 		
 		JsonObject AppObject = new JsonParser().parse(id).getAsJsonObject();
 		String appointmentID = AppObject.get("appointmentID").getAsString();
@@ -48,7 +48,7 @@ public class AppointmentService {
 	}
 	
 	@POST
-	@Path("/")
+	@Path("/add")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String insertAppointment(@FormParam("date") String date, @FormParam("time") String time,
@@ -59,7 +59,7 @@ public class AppointmentService {
 	}
 
 	@PUT
-	@Path("/")
+	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String updateAppointment(String AppData) {
@@ -80,7 +80,7 @@ public class AppointmentService {
 	}
 	
 	@DELETE
-	@Path("/")
+	@Path("/delete")
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String DelAppoinment(String ApplicationID) {

@@ -23,7 +23,7 @@ public class PaymentService {
 	}
 
 	@POST
-	@Path("/")
+	@Path("/add")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String insertPayment(@FormParam("type") String type, @FormParam("dateAndTime") String dateAndTime,
@@ -33,7 +33,7 @@ public class PaymentService {
 	}
 	
 	@PUT
-	@Path("/")
+	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String updatePayment(String paymentData) {

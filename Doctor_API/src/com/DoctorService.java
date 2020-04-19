@@ -27,7 +27,7 @@ public class DoctorService {
     
     //Inserting Doctors
     @POST
-    @Path("/")
+    @Path("/add")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
     @Produces(MediaType.TEXT_PLAIN)
     public String insertDoctor(@FormParam("NIC") String NIC, @FormParam("gender") String gender, @FormParam("firstName") String firstName,
@@ -50,7 +50,7 @@ public class DoctorService {
 
     //update doctor
     @PUT
-    @Path("/")
+    @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN) 
     public String updateDoctor(String doctorData)
@@ -81,7 +81,7 @@ public class DoctorService {
 
     //delete doctor
     @DELETE
-    @Path("/")
+    @Path("/delete")
     @Consumes(MediaType.APPLICATION_XML)
     @Produces(MediaType.TEXT_PLAIN)
     public String deleteDoctor(String doctorData)

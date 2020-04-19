@@ -24,7 +24,7 @@ public class RefundService {
 	}
 
 	@POST
-	@Path("/")
+	@Path("/add")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String insertRefund(@FormParam("paymentID") String paymentID, @FormParam("amount") String amount,
@@ -35,7 +35,7 @@ public class RefundService {
 	
 
 	@PUT
-	@Path("/")
+	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String updateRefund(String refundData) {
@@ -54,7 +54,7 @@ public class RefundService {
 	}
 
 	@DELETE
-	@Path("/")
+	@Path("/delete")
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String deleteRefund(String refundData) {
