@@ -302,8 +302,8 @@ public class Doctor {
 			preparedStmt.setString(10, password);
 			preparedStmt.setInt(11, Integer.parseInt(adminID));
 			preparedStmt.setString(12, doctorStatus);
-			preparedStmt.setInt(13, Integer.parseInt(doctorID));
-			preparedStmt.setBoolean(14, Boolean.getBoolean(valid));
+			preparedStmt.setInt(14, Integer.parseInt(doctorID));
+			preparedStmt.setBoolean(13, Boolean.getBoolean(valid));
 			
 			//execute the statement
 			preparedStmt.execute();
