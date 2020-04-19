@@ -395,6 +395,79 @@ public class SecurityFilter implements ContainerRequestFilter {
 						requestContext.abortWith(unauthorizedStatus);
 					}
 				}
+			}else if ((requestContext.getUriInfo().getPath().contains("myresource"))) {
+				List<String> authHeader = requestContext.getHeaders().get(AUTHORIZATION_HEADER_KEY);
+
+				if (authHeader != null && authHeader.size() > 0) {
+
+					String authToken = authHeader.get(0);
+					authToken = authToken.replaceFirst(AUTHORIZATION_HEADER_PREFIX, "");
+					byte[] decodedBytes = Base64.getDecoder().decode(authToken);
+					String decodeString = new String(decodedBytes);
+
+					StringTokenizer tokenizer = new StringTokenizer(decodeString, ":");
+
+					String username = tokenizer.nextToken();
+					String password = tokenizer.nextToken();
+
+					Connection connection = con.connect();
+
+					String email = username;
+					String pwd = password;
+
+					String sql3 = new String("SELECT * FROM doctor WHERE email=? And password=?");
+					String sql2 = new String("SELECT * FROM admin WHERE username=? And password=?");
+					String sql = new String("SELECT * FROM patient WHERE email=? AND password=?");
+
+					try {
+						PreparedStatement stm = connection.prepareStatement(sql);
+						stm.setString(1, email);
+						stm.setString(2, pwd);
+						ResultSet rs = stm.executeQuery();
+
+						if (rs.next()) {
+							if (email.equals(username) && pwd.equals(password)) {
+								return;
+							}
+
+						} else if (!rs.next()) {
+							PreparedStatement stm1 = connection.prepareStatement(sql2);
+							stm1.setString(1, email);
+							stm1.setString(2, pwd);
+							ResultSet rs1 = stm1.executeQuery();
+
+							if (rs1.next()) {
+								if (email.equals(username) && pwd.equals(password)) {
+									return;
+								}
+
+							}
+
+						}else if (!rs.next()) {
+							PreparedStatement stm1 = connection.prepareStatement(sql3);
+							stm1.setString(1, email);
+							stm1.setString(2, pwd);
+							ResultSet rs1 = stm1.executeQuery();
+
+							if (rs1.next()) {
+								if (email.equals(username) && pwd.equals(password)) {
+									return;
+								}
+
+							}
+
+						}
+
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+
+						Response unauthorizedStatus = Response.status(Response.Status.UNAUTHORIZED)
+								.entity("User cannot access ! Enter username & password.").build();
+
+						requestContext.abortWith(unauthorizedStatus);
+					}
+				}
 			}
 	}
 }
