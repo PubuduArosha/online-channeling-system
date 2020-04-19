@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2020 at 02:35 AM
+-- Generation Time: Apr 19, 2020 at 04:22 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -39,7 +39,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`adminID`, `name`, `password`) VALUES
-(1, 'Pubudu', '1234');
+(1, 'Pubudu', '1234'),
+(2, 'arosha', '1234');
 
 -- --------------------------------------------------------
 
@@ -94,8 +95,9 @@ CREATE TABLE `doctor` (
 --
 
 INSERT INTO `doctor` (`doctorID`, `NIC`, `gender`, `firstName`, `lastName`, `email`, `specification`, `contact`, `workDate`, `workTime`, `password`, `adminID`, `doctorStatus`, `valid`) VALUES
-(1, '123456789v', 'Male', 'Karunarathna', 'Gunasena', 'kg@gmail.com', 'COVID19', 761234567, 'Weekday', '8.00am-12.00p.m', '1234', 1, 'Work', 1),
-(3, '1234567812v', 'Male', 'Gunasiri', 'A', 'a@gmail.com', 'covid19', 171581085, 'Weekday', '10.00pm - 12.pm', '1234', 1, 'Work', 0);
+(1, '1234567890v', 'Male', 'Karunarathna', 'Gunasena', 'kg@gmail.com', 'COVID19', 761234567, 'Weekday', '8.00am-12.00p.m', '1234', 1, 'Work', 1),
+(3, '1234567812v', 'Male', 'Gunasiri', 'Karunasena', 'gunasiri@gmail.com', 'Family Doctor ', 764812594, 'Weekday', '10.00pm - 12.pm', '1234', 1, 'Work', 0),
+(4, '7815841258v', 'Femal', 'Kasuni', 'Galappaththi', 'kasuni@gmail.com', 'Eye specialist ', 714844523, 'WeekEnd', '8.00am-10.00p.m', '1234', 1, 'Work', 0);
 
 -- --------------------------------------------------------
 
@@ -115,7 +117,9 @@ CREATE TABLE `hospital` (
 --
 
 INSERT INTO `hospital` (`hospitalID`, `hospitalName`, `location`, `adminID`) VALUES
-(3, 'IDH Hospital', 'Angoda', 1);
+(3, 'IDH Hospital', 'Angoda', 1),
+(9, 'Newil Pranandu Hospital', 'Malabe', 2),
+(10, 'Asiri Hospital', 'Colombo', 1);
 
 -- --------------------------------------------------------
 
@@ -140,7 +144,9 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`patientID`, `NIC`, `firstName`, `lastName`, `email`, `address`, `password`, `city`, `contact`) VALUES
-(1, '1234567813v', 'vihaga', 'nalaka', 'nv@gmail.com', 'no123, abc road, zwc.', '1234', 'galle', 715894780);
+(1, '1234567813v', 'vihaga', 'nalaka', 'nv@gmail.com', 'no123, abc road, zwc.', '1234', 'galle', 715894780),
+(2, '1581269774V', 'Sunil', 'Perera', 's@g.com', 'no 123, Kaduwela road, malabe.', '1234', 'malabe', 771484598),
+(3, '845126472815V', 'Jaya', 'Sri', 'jaya@g.com', 'no 152, galle road, galle.', '1234', 'galle', 768495235);
 
 -- --------------------------------------------------------
 
@@ -155,6 +161,14 @@ CREATE TABLE `payment` (
   `amount` double NOT NULL,
   `paymentStatus` varchar(12) NOT NULL DEFAULT 'new'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`paymentID`, `type`, `dateAndTime`, `amount`, `paymentStatus`) VALUES
+(1, 'crd', '2020-04-08 19:49:25', 1920, 'new'),
+(2, 'crd', '2020-04-08 19:49:25', 1920, 'new');
 
 -- --------------------------------------------------------
 
@@ -171,6 +185,13 @@ CREATE TABLE `refun` (
   `adminID` int(11) NOT NULL,
   `paymentID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `refun`
+--
+
+INSERT INTO `refun` (`refunID`, `amount`, `date`, `time`, `method`, `adminID`, `paymentID`) VALUES
+(1, 1920, '2020-04-19', '34:50:43', 'credit', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -253,43 +274,43 @@ ALTER TABLE `worksin`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `adminID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `adminID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `appointmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `appointmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `doctorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `doctorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `hospital`
 --
 ALTER TABLE `hospital`
-  MODIFY `hospitalID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `hospitalID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `patientID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `patientID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `paymentID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `paymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `refun`
 --
 ALTER TABLE `refun`
-  MODIFY `refunID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `refunID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -301,7 +322,9 @@ ALTER TABLE `refun`
 ALTER TABLE `appointment`
   ADD CONSTRAINT `fk1` FOREIGN KEY (`hospitalID`) REFERENCES `hospital` (`hospitalID`),
   ADD CONSTRAINT `fk2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`),
-  ADD CONSTRAINT `fk3` FOREIGN KEY (`doctorID`) REFERENCES `doctor` (`doctorID`);
+  ADD CONSTRAINT `fk3` FOREIGN KEY (`doctorID`) REFERENCES `doctor` (`doctorID`),
+  ADD CONSTRAINT `fk4` FOREIGN KEY (`refundID`) REFERENCES `refun` (`refunID`),
+  ADD CONSTRAINT `fk5` FOREIGN KEY (`paymentID`) REFERENCES `payment` (`paymentID`);
 
 --
 -- Constraints for table `doctor`
