@@ -102,5 +102,20 @@ public class AdminResource {
 		return admin.getAppointments();
 	}
 	
+/*-------------------------------------------------------Patient----------------------------------*/
+	@Path("patientdetails")
+	@GET
+	public List<Admin> getPatientDetails() {
+		System.out.println("getPatient called...");
+		return admin.getPatientDetails();
+	}
+	
+/*-------------------------------------------------------Payment----------------------------------*/
+	@Path("paymentdetails")
+	@GET
+	public List<Admin> getPayemtDetails() {
+		System.out.println("getPayemtDetails called...");
+		return admin.getPayemtDetails();
+	}
 	
 }

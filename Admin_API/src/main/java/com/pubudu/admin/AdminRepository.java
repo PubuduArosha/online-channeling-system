@@ -168,7 +168,6 @@ public class AdminRepository {
 		return doctors;
 	}
 	
-	
 	public void doctorValidate(Admin d1) {
 		String sql = "update doctor set valid=? where DoctorID=?";
 		try {
@@ -181,7 +180,6 @@ public class AdminRepository {
 			System.out.println(e);
 		}
 	}
-	
 	
 /*--------------------------------------------------------------------Appointment---------------------------- ----------*/
 	public List<Admin> getAppointments(){
@@ -232,6 +230,32 @@ public class AdminRepository {
 		}
 		
 		return patients;
+	}
+
+	
+/*------------------------------------------------------------------Payment--------------------------------------*/
+	public List<Admin> getPayemtDetails(){
+		List<Admin> payment = new ArrayList<>();
+		String sql = "select * from payment";
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while(rs.next()) {
+				Admin p = new Admin();
+				
+				p.setPaymentID(rs.getInt(1));
+				p.setType(rs.getString(2));
+				p.setDateAndTime(rs.getString(3));
+				p.setPamount(rs.getDouble(4));
+				p.setPaymentStatus(rs.getString(5));
+				
+				payment.add(p);
+			}
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return payment;
 	}
 
 }
