@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2020 at 08:59 AM
+-- Generation Time: Apr 19, 2020 at 02:35 AM
 -- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.29
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -30,17 +31,15 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `adminID` int(10) NOT NULL,
   `name` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `username` varchar(20) NOT NULL
+  `password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`adminID`, `name`, `password`, `username`) VALUES
-(1, 'Admin', '123456789', 'Admin 01'),
-(2, 'Vetha', '987456321', 'Vetha 2');
+INSERT INTO `admin` (`adminID`, `name`, `password`) VALUES
+(1, 'Pubudu', '1234');
 
 -- --------------------------------------------------------
 
@@ -55,9 +54,9 @@ CREATE TABLE `appointment` (
   `hospitalID` int(11) NOT NULL,
   `patientID` int(11) NOT NULL,
   `doctorID` int(11) NOT NULL,
-  `refundID` int(11) NOT NULL,
+  `refundID` int(11) DEFAULT NULL,
   `paymentID` int(11) NOT NULL,
-  `appointmentStatus` tinyint(1) NOT NULL
+  `appointmentStatus` varchar(8) NOT NULL DEFAULT 'new'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -65,8 +64,7 @@ CREATE TABLE `appointment` (
 --
 
 INSERT INTO `appointment` (`appointmentID`, `date`, `time`, `hospitalID`, `patientID`, `doctorID`, `refundID`, `paymentID`, `appointmentStatus`) VALUES
-(2, '2020-10-24', '12:00:00', 1, 1, 3, 1, 1, 1),
-(3, '2020-04-01', '16:07:04', 2, 1, 4, 2, 2, 0);
+(4, '2020-04-01', '23:49:25', 3, 1, 1, NULL, 1, 'new');
 
 -- --------------------------------------------------------
 
@@ -87,16 +85,17 @@ CREATE TABLE `doctor` (
   `workTime` varchar(20) NOT NULL,
   `password` varchar(50) NOT NULL,
   `adminID` int(10) NOT NULL,
-  `doctorStatus` tinyint(1) NOT NULL
+  `doctorStatus` varchar(20) NOT NULL,
+  `valid` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `doctor`
 --
 
-INSERT INTO `doctor` (`doctorID`, `NIC`, `gender`, `firstName`, `lastName`, `email`, `specification`, `contact`, `workDate`, `workTime`, `password`, `adminID`, `doctorStatus`) VALUES
-(3, '972586894V', 'Male', 'Washi', 'Nussry', 'nussry@gmail.com', 'MBBS - Heart Surgeon', 778968956, '2020-12-10', '12:00:56', '123456789', 1, 0),
-(4, '789945689V', 'Male', 'Vetha', 'Kumar', 'raja@v.lk', 'MBBS- Neurologist', 786985236, '2020-04-30', '12:30:00', '9874656321', 2, 1);
+INSERT INTO `doctor` (`doctorID`, `NIC`, `gender`, `firstName`, `lastName`, `email`, `specification`, `contact`, `workDate`, `workTime`, `password`, `adminID`, `doctorStatus`, `valid`) VALUES
+(1, '123456789v', 'Male', 'Karunarathna', 'Gunasena', 'kg@gmail.com', 'COVID19', 761234567, 'Weekday', '8.00am-12.00p.m', '1234', 1, 'Work', 1),
+(3, '1234567812v', 'Male', 'Gunasiri', 'A', 'a@gmail.com', 'covid19', 171581085, 'Weekday', '10.00pm - 12.pm', '1234', 1, 'Work', 0);
 
 -- --------------------------------------------------------
 
@@ -107,17 +106,16 @@ INSERT INTO `doctor` (`doctorID`, `NIC`, `gender`, `firstName`, `lastName`, `ema
 CREATE TABLE `hospital` (
   `hospitalID` int(50) NOT NULL,
   `hospitalName` varchar(50) NOT NULL,
-  `adminID` int(11) NOT NULL,
-  `location` varchar(50) NOT NULL
+  `location` varchar(50) NOT NULL,
+  `adminID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `hospital`
 --
 
-INSERT INTO `hospital` (`hospitalID`, `hospitalName`, `adminID`, `location`) VALUES
-(1, 'Navaloka', 1, 'Marudhana'),
-(2, 'Hemas', 2, 'Navanthura');
+INSERT INTO `hospital` (`hospitalID`, `hospitalName`, `location`, `adminID`) VALUES
+(3, 'IDH Hospital', 'Angoda', 1);
 
 -- --------------------------------------------------------
 
@@ -142,8 +140,7 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`patientID`, `NIC`, `firstName`, `lastName`, `email`, `address`, `password`, `city`, `contact`) VALUES
-(1, '856936891V', 'Raja', 'Bala', 'b@vetha.lk', 'Colombo 6', '123456789', 'Colombo', 778969365),
-(2, '852369741V', 'Ram', 'Charan', 'ram@r.lk', 'Telungana,Andra', '789456123', 'Vaisak', 784598562);
+(1, '1234567813v', 'vihaga', 'nalaka', 'nv@gmail.com', 'no123, abc road, zwc.', '1234', 'galle', 715894780);
 
 -- --------------------------------------------------------
 
@@ -156,27 +153,17 @@ CREATE TABLE `payment` (
   `type` varchar(20) NOT NULL,
   `dateAndTime` datetime NOT NULL DEFAULT current_timestamp(),
   `amount` double NOT NULL,
-  `paymentStatus` varchar(12) NOT NULL
+  `paymentStatus` varchar(12) NOT NULL DEFAULT 'new'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `payment`
---
-
-INSERT INTO `payment` (`paymentID`, `type`, `dateAndTime`, `amount`, `paymentStatus`) VALUES
-(1, 'Credit Card', '2020-04-05 12:14:12', 5000, 'Pending'),
-(2, 'Debit Card', '2020-04-18 01:01:33', 10000, 'Paid'),
-(3, 'Visa Card', '2020-04-22 04:25:25', 30000, 'Failed'),
-(4, 'Credit Card', '2020-07-03 12:21:25', 45000, 'Paid');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `refund`
+-- Table structure for table `refun`
 --
 
-CREATE TABLE `refund` (
-  `refundID` int(11) NOT NULL,
+CREATE TABLE `refun` (
+  `refunID` int(11) NOT NULL,
   `amount` double NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
@@ -184,15 +171,6 @@ CREATE TABLE `refund` (
   `adminID` int(11) NOT NULL,
   `paymentID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `refund`
---
-
-INSERT INTO `refund` (`refundID`, `amount`, `date`, `time`, `method`, `adminID`, `paymentID`) VALUES
-(1, 5000, '2020-05-14', '12:00:00', 'Online', 1, 1),
-(2, 800, '2020-02-14', '14:10:04', 'Online', 1, 2),
-(8, 8000, '2020-03-07', '14:10:10', 'Online', 2, 4);
 
 -- --------------------------------------------------------
 
@@ -223,7 +201,6 @@ ALTER TABLE `appointment`
   ADD KEY `hospitalID` (`hospitalID`),
   ADD KEY `patientID` (`patientID`),
   ADD KEY `doctorID` (`doctorID`),
-  ADD KEY `refundID` (`refundID`),
   ADD KEY `paymentID` (`paymentID`);
 
 --
@@ -253,11 +230,12 @@ ALTER TABLE `payment`
   ADD PRIMARY KEY (`paymentID`);
 
 --
--- Indexes for table `refund`
+-- Indexes for table `refun`
 --
-ALTER TABLE `refund`
-  ADD PRIMARY KEY (`refundID`),
-  ADD KEY `adminID` (`adminID`);
+ALTER TABLE `refun`
+  ADD PRIMARY KEY (`refunID`),
+  ADD KEY `adminID` (`adminID`),
+  ADD KEY `paymentID` (`paymentID`);
 
 --
 -- Indexes for table `worksin`
@@ -275,43 +253,43 @@ ALTER TABLE `worksin`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `adminID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `adminID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `appointmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `appointmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `doctorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `doctorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `hospital`
 --
 ALTER TABLE `hospital`
-  MODIFY `hospitalID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `hospitalID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `patientID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `patientID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `paymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `paymentID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `refund`
+-- AUTO_INCREMENT for table `refun`
 --
-ALTER TABLE `refund`
-  MODIFY `refundID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `refun`
+  MODIFY `refunID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -323,9 +301,7 @@ ALTER TABLE `refund`
 ALTER TABLE `appointment`
   ADD CONSTRAINT `fk1` FOREIGN KEY (`hospitalID`) REFERENCES `hospital` (`hospitalID`),
   ADD CONSTRAINT `fk2` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`),
-  ADD CONSTRAINT `fk3` FOREIGN KEY (`doctorID`) REFERENCES `doctor` (`doctorID`),
-  ADD CONSTRAINT `fk4` FOREIGN KEY (`refundID`) REFERENCES `refund` (`refundID`),
-  ADD CONSTRAINT `fk5` FOREIGN KEY (`paymentID`) REFERENCES `payment` (`paymentID`);
+  ADD CONSTRAINT `fk3` FOREIGN KEY (`doctorID`) REFERENCES `doctor` (`doctorID`);
 
 --
 -- Constraints for table `doctor`
@@ -340,10 +316,11 @@ ALTER TABLE `hospital`
   ADD CONSTRAINT `h1` FOREIGN KEY (`adminID`) REFERENCES `admin` (`adminID`);
 
 --
--- Constraints for table `refund`
+-- Constraints for table `refun`
 --
-ALTER TABLE `refund`
-  ADD CONSTRAINT `r1` FOREIGN KEY (`adminID`) REFERENCES `admin` (`adminID`);
+ALTER TABLE `refun`
+  ADD CONSTRAINT `r1` FOREIGN KEY (`adminID`) REFERENCES `admin` (`adminID`),
+  ADD CONSTRAINT `w3` FOREIGN KEY (`refunID`) REFERENCES `payment` (`paymentID`);
 
 --
 -- Constraints for table `worksin`
